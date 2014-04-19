@@ -5,12 +5,12 @@ import subprocess as sub
 #dst port 80 for http incoming requests 
 #, '-s', '1500','-A', 'dst', 'port', '80'
 
-p = sub.Popen(('sudo', 'tcpdump', '-l', '-i', 'eth4'), stdout=sub.PIPE) #Subprocess tcpdump pipe output to this python script
+p = sub.Popen(('sudo', 'tcpdump', '-l', '-i', 'eth3'), stdout=sub.PIPE) #Subprocess tcpdump pipe output to this python script
 #Content of request + who is sending
 #Statistics on number of packets and bytes in TCP data, TCP SYN, UDP, ICMP, and total
 
-for row in p.stdout:
-	print row.rsplit();
+for row in iter(p.stdout.readline, ''):
+	print row
 # 	tokens = row.rsplit('\n')
 # 	print tokens[0]
 	print '-----------------------------'
