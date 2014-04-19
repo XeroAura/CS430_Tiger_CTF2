@@ -5,7 +5,7 @@ require HTTP::Request;
 require LWP::UserAgent;
 
 while(1){
-	my $request = HTTP::Request->new(GET=>'http://www.google.com');
+	my $request = HTTP::Request->new(GET=>'server');
 	$request->content('hdskhdfjkgdf');
 	my $ua = LWP::UserAgent->new;
 	my $response = $ua->request($request);
