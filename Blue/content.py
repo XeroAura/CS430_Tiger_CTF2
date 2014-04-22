@@ -23,55 +23,59 @@ for row in iter(p.stdout.readline, ''):
 	if len(tokens) >= 6:
 		if tokens[1] == 'IP': #Packet header instead of content
 			if tokens[5] == 'Flags': #TCP
-				if 'S' in tokens[6]:
 
-					print '--------------------------------------------'
-					tcpsyn_pak = tcpsyn_pak + 1;
-					total_pak = total_pak + 1;
+				if 'S' in tokens[6]:
+					print('--------------------------------------------')
+					tcpsyn_pak = tcpsyn_pak + 1
+					total_pak = total_pak + 1
 					if tokens[-2] == 'length':
 						tcpsyn_size = tcpsyn_size + int(tokens[-1])
 						total_size = total_size + int(tokens[-1])
+					stats.write("Sender: " + tokens[2])
 					stats.write("TCP SYN: " + tcpsyn_pak + "	SYN SIZE: " + tcpsyn_size + "\n")
 					stats.write("Total Packets: " + total_pak + "	Total Size: " + total_size + "\n")
 
 				else:
-					print '--------------------------------------------'
-					tcp_pak = tcp_pak + 1;
-					total_pak = total_pak + 1;
+					print ('--------------------------------------------')
+					tcp_pak = tcp_pak + 1
+					total_pak = total_pak + 1
 					if tokens[-2] == 'length':
 						tcp_size = tcp_size + int(tokens[-1])
 						total_size = total_size + int(tokens[-1])
+					stats.write("Sender: " + tokens[2])
 					stats.write("TCP: " + tcpsyn_pak + "	TCP SIZE: " + tcpsyn_size + "\n")
 					stats.write("Total Packets: " + total_pak + "	Total Size: " + total_size + "\n")
 
 			elif tokens[5] == 'ICMP': #ICMP
-				print '--------------------------------------------'
-				icmp_pak = icmp_pak + 1;
-					total_pak = total_pak + 1;
+				print ('--------------------------------------------')
+				icmp_pak = icmp_pak + 1
+				total_pak = total_pak + 1
 				if tokens[-2] == 'length':
 					icmp_size = icmp_size + int(tokens[-1])
 					total_size = total_size + int(tokens[-1])
+				stats.write("Sender: " + tokens[2])
 				stats.write("ICMP: " + tcpsyn_pak + "	ICMP SIZE: " + tcpsyn_size + "\n")
 				stats.write("Total Packets: " + total_pak + "	Total Size: " + total_size + "\n")
 
 			elif tokens[5] == 'SIP': #UDP
-				print '--------------------------------------------'
-				udp_pak = udp_pak + 1;
+				print ('--------------------------------------------')
+				udp_pak = udp_pak + 1
 				if tokens[-2] == 'length':
-					total_pak = total_pak + 1;
+					total_pak = total_pak + 1
 					udp_size = udp_size + int(tokens[-1])
 					total_size = total_size + int(tokens[-1])
+				stats.write("Sender: " + tokens[2])
 				stats.write("UDP: " + tcpsyn_pak + "	UDP SIZE: " + tcpsyn_size + "\n")
 				stats.write("Total Packets: " + total_pak + "	Total Size: " + total_size + "\n")
 
 			else:
-				print row
+				print (row)
 
 		else:
-			print row
+			print (row)
 
 	else:
-		print row
+		print (row)
 
 	'''
 	#Content of request + who is sending
