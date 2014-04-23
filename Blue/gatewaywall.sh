@@ -18,9 +18,13 @@ $IPTABLES -A FORWARD  -p tcp -s server -j ACCEPT
 
 $IPTABLES -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
 $IPTABLES -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
-#below are examples for filtering based on ttl or packet length
+#below rule filters based on ttl
 #$IPTABLES -A FORWARD -p tcp -m ttl --ttl-eq=x -j DROP
-#$IPTABLES -A FORWARD -p tcp -m length -length proto:length -j DROP
+#below rule filters based on length
+#$IPTABLES -A FORWARD -p tcp -m length -length length -j DROP
+#below rule only allows 15 connections per second from the specified client1
+#$IPTABLES -A FORWARD -p tcp -m limit --limit 15/s -s client1 -j ACCEPT
+
 # *IGNORE* all other traffic
 $IPTABLES -A OUTPUT -o $ETH -j DROP
 $IPTABLES -A INPUT -i $ETH -j DROP
