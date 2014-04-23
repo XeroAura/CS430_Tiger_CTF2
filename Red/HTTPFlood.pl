@@ -8,13 +8,8 @@ require LWP::UserAgent;
 
 my $ua = LWP::UserAgent->new;
 my $port = 80;
-my $url = 'http://www.apple.com/';
-while(1){
-	my $request = HTTP::Request->new(POST=>$url);
-    $port = $port++;
-	$request->header('content-type'=>'application/json');
-    $request->header('x-auth-token'=>'sjdklfjklg389js89fsj');
-    
+
+
 	my $postData = '{"jdskljskdlfsd":"jskdlfjskldfsdf",
                     "jdskljskdlfsd":"jskdlfjskldfsdf",
                     "jdskljskdlfsd":"jskdlfjskldfsdf",
@@ -2552,19 +2547,26 @@ while(1){
     "jdskljskdlfsd":"jskdlfjskldfsdf",
     "jdskljskdlfsd":"jskdlfjskldfsdf"
 }';
-	$request->content($postData);
 
-	my $response = $ua->request($request);
+
     while(1){
-        $response = $ua->request($request);
+        my $url = 'http://server/';
+        
+        my $random = int(rand(10))+1;
+        my $page = 'page'.$random.'.html';
+        print $page,"\n";
+#        sleep 1;
+        $url  = $url.$page.'/';
+        
+        my $request = HTTP::Request->new(POST=>$url);
+        $port = $port++;
+        $request->header('content-type'=>'application/json');
+        $request->header('x-auth-token'=>'sjdklfjklg389js89fsj');
+        
+        $request->content($postData);
 
-    }
-    if($response->is_success){
-        print $response->decoded_content, "\n";
-    }else{
-        print "Error code: ", $response->code, "\n";
-        print "Error message: ", $response->message, "\n";
+        my $response = $ua->request($request);
+        print $response->status_line,"\n";
+
     }
     
-	print $response->status_line;
-}
