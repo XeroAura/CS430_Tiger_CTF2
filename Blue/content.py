@@ -25,7 +25,7 @@ for row in iter(p.stdout.readline, ''):
 			if tokens[5] == 'Flags': #TCP
 
 				if 'S' in tokens[6]:
-					print('--------------------------------------------')
+					stats.write('--------------------------------------------')
 					tcpsyn_pak = tcpsyn_pak + 1
 					total_pak = total_pak + 1
 					if tokens[-2] == 'length':
@@ -36,7 +36,7 @@ for row in iter(p.stdout.readline, ''):
 					stats.write("Total Packets: " + total_pak + "	Total Size: " + total_size + "\n")
 
 				else:
-					print ('--------------------------------------------')
+					stats.write ('--------------------------------------------')
 					tcp_pak = tcp_pak + 1
 					total_pak = total_pak + 1
 					if tokens[-2] == 'length':
@@ -47,7 +47,7 @@ for row in iter(p.stdout.readline, ''):
 					stats.write("Total Packets: " + total_pak + "	Total Size: " + total_size + "\n")
 
 			elif tokens[5] == 'ICMP': #ICMP
-				print ('--------------------------------------------')
+				stats.write ('--------------------------------------------')
 				icmp_pak = icmp_pak + 1
 				total_pak = total_pak + 1
 				if tokens[-2] == 'length':
@@ -69,13 +69,13 @@ for row in iter(p.stdout.readline, ''):
 				stats.write("Total Packets: " + total_pak + "	Total Size: " + total_size + "\n")
 
 			else:
-				print (row)
+				stats.write(row)
 
 		else:
-			print (row)
+			stats.write(row)
 
 	else:
-		print (row)
+		stats.write(row)
 
 	'''
 	#Content of request + who is sending
