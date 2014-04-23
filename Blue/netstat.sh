@@ -1,5 +1,10 @@
 #!/bin/bash
-netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
+while :
+do
+  netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
+  sleep 2
+  clear
+done
 #this script prints out the number of connections to this server
 #addresses with really high number of connections could be attackers
 #after a connection is closed it still shows up for like 20 seconds
